@@ -24,9 +24,20 @@ end
 
 def recup(token)
   access_token = token['access_token']
-  puts access_token
+end
+
+def get_latest_release(token) 
+  requete = HTTParty.get(
+    "https://api.spotify.com/v1/browse/new-releases?limit=2",
+    @headers = {
+      "Content-Type": 'application/json',
+      "Accept": 'application/json',
+      "Authorization": "Bearer #{token}"
+    }
+  )
 end
 
 key = base
-token = encoding(key)
-recup(token)
+hash_token = encoding(key)
+token = recup(hash_token)
+puts get_latest_release(token)
